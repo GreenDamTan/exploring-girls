@@ -91,7 +91,7 @@ class ExploringGirls:
                 delay = ExploringGirls.calcRemainingTime(fleetInfo["endTime"]) + 20
                 threading.Timer(delay, self.restartExplore, [fleet, exploreId]).start()
                 log = "Fleet " + fleet + " has gone to " + exploreId
-                log += ", coming back in " + math.floor(delay / 60) + " minutes"
+                log += ", coming back in " + str(math.floor(delay / 60)) + " minutes"
                 print(log)
                 return
         print("Error: failed to restart exploration!")
