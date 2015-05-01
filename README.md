@@ -4,7 +4,8 @@
 使用方法:
 ---------
 
-  * 将 main.py 中的 username, password, UID 以及 server 改成你自己的相关信息
   * 使用官方客户端挂好4个远征然后退出
-  * 启动该程序 ( python3 main.py )
+  * 启动该程序: `python3 main.py`
+  * 如果是第一次使用，会提示输入帐号密码等信息
   * 打开官方客户端前记得退出该程序 ( Ctrl+C )
+  * 如果设置有误，请删除config.json后重新运行
