@@ -33,7 +33,7 @@ class ExploringGirls:
         cookie = response.getheader("Set-Cookie").split(';')[0]
         uid = cookie.split('=')[1].split('.')[0]
         if not ("uid" in config):
-            input("请确认您的UID是" + uid + ", press enter to continue")
+            input("请确认您的UID是" + uid + "，按回车键")
         elif uid != config["uid"]:
             print("Error: UID Missmatch!")
             return
@@ -103,7 +103,7 @@ class ExploringGirls:
         return (endtime - now).total_seconds()
 
     def httpGet(self, url, setCookie = False):
-        if Debug:
+        if debug:
             conn = http.client.HTTPConnection("127.0.0.1:8080")
             conn.set_tunnel(self.server)
         else:
@@ -117,7 +117,7 @@ class ExploringGirls:
         return json.loads(data.decode("utf-8"))
 
     def httpPost(self, url, params):
-        if Debug:
+        if debug:
             conn = http.client.HTTPConnection("127.0.0.1:8080")
             conn.set_tunnel(self.server)
         else:
