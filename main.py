@@ -102,8 +102,9 @@ class ExploringGirls:
         return (endtime - now).total_seconds()
 
     def httpGet(self, domain, url, setCookie = False):
-        conn = http.client.HTTPConnection("127.0.0.1:8080")
-        conn.set_tunnel(domain)
+        conn = http.client.HTTPConnection(domain)
+        #conn = http.client.HTTPConnection("127.0.0.1:8080")
+        #conn.set_tunnel(domain)
         url = ExploringGirls.completeUrl(url)
         conn.request("GET", url, None, self.headers)
         response = conn.getresponse()
@@ -113,8 +114,9 @@ class ExploringGirls:
         return json.loads(data.decode("utf-8"))
 
     def httpPost(self, domain, url, params):
-        conn = http.client.HTTPConnection("127.0.0.1:8080")
-        conn.set_tunnel(domain)
+        conn = http.client.HTTPConnection(domain)
+        #conn = http.client.HTTPConnection("127.0.0.1:8080")
+        #conn.set_tunnel(domain)
         url = ExploringGirls.completeUrl(url)
         postHeader = self.headers
         postHeader["Content-Type"] = "application/x-www-form-urlencoded"
