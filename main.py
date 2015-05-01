@@ -1,9 +1,9 @@
 import collections, datetime, hashlib, http.client, json, math, threading, zlib
 
-username = "Your use name"
+username = "Your user name"
 password = "Your password"
 uid = "Your UID"
-server = "s3.zj.p7game.com"
+server = "s6.zj.p7game.com"
 
 # Servers:
 #   s2.zj.p7game.com  胡德
@@ -63,6 +63,7 @@ class ExploringGirls:
 
         # Deal with remaining time
         info = info["pveExploreVo"]["levels"]
+        print(info)
         cnt = 0
         for fleetInfo in info:
             # delay 20 more seconds to make it safer
@@ -96,9 +97,9 @@ class ExploringGirls:
         print("Error: failed to restart exploration!")
 
     def calcRemainingTime(timestamp):
-        # conver to UTC time
-        endtime = datetime.datetime.fromtimestamp(timestamp - 8 * 3600)
-        now = datetime.datetime.utcnow()
+        # It seems the server is using client's local time
+        endtime = datetime.datetime.fromtimestamp(timestamp)
+        now = datetime.datetime.now()
         return (endtime - now).total_seconds()
 
     def httpGet(self, domain, url, setCookie = False):
@@ -126,8 +127,8 @@ class ExploringGirls:
 
     def getT():
         # timestamp
-        time_of_20150101 = 63555699600
-        delta = datetime.datetime.utcnow() - datetime.datetime(2015, 1, 1)
+        time_of_20150101 = 63555667200
+        delta = datetime.datetime.now() - datetime.datetime(2015, 1, 1)
         seconds = delta.total_seconds() + time_of_20150101
         return str(math.trunc(seconds * 10000000))
     
