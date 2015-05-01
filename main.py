@@ -1,5 +1,7 @@
 import collections, datetime, hashlib, http.client, json, math, os.path, random, threading, zlib
 
+debug = False
+
 class ExploringGirls:
     def __init__(self):
         self.server = ""
@@ -31,7 +33,7 @@ class ExploringGirls:
         cookie = response.getheader("Set-Cookie").split(';')[0]
         uid = cookie.split('=')[1].split('.')[0]
         if not ("uid" in config):
-            input("请确认您的UID是" + uid + "，按回车键继续")
+            input("请确认您的UID是" + uid + ", press enter to continue")
         elif uid != config["uid"]:
             print("Error: UID Missmatch!")
             return
@@ -101,9 +103,11 @@ class ExploringGirls:
         return (endtime - now).total_seconds()
 
     def httpGet(self, url, setCookie = False):
-        #conn = http.client.HTTPConnection(self.server)
-        conn = http.client.HTTPConnection("127.0.0.1:8080")
-        conn.set_tunnel(self.server)
+        if Debug:
+            conn = http.client.HTTPConnection("127.0.0.1:8080")
+            conn.set_tunnel(self.server)
+        else:
+            conn = http.client.HTTPConnection(self.server)
         url = ExploringGirls.completeUrl(url)
         conn.request("GET", url, None, self.headers)
         response = conn.getresponse()
@@ -113,9 +117,11 @@ class ExploringGirls:
         return json.loads(data.decode("utf-8"))
 
     def httpPost(self, url, params):
-        #conn = http.client.HTTPConnection(self.server)
-        conn = http.client.HTTPConnection("127.0.0.1:8080")
-        conn.set_tunnel(self.server)
+        if Debug:
+            conn = http.client.HTTPConnection("127.0.0.1:8080")
+            conn.set_tunnel(self.server)
+        else:
+            conn = http.client.HTTPConnection(self.server)
         url = ExploringGirls.completeUrl(url)
         postHeader = self.headers
         postHeader["Content-Type"] = "application/x-www-form-urlencoded"
